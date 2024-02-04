@@ -1,0 +1,54 @@
+#!/usr/bin/env bash
+
+# Select a directory using fzf from a predefined set of paths
+selected=$(find ~/fun ~/Dropbox -mindepth 1 -maxdepth 2 -type d | fzf)
+
+# Exit if no selection is made
+if [[ -z $selected ]]; then
+    exit 0
+fi
+
+# Extract the base name of the selected directory to use in session/window names
+selected_name=$(basename "$selected" | tr . _)
+
+# Clean the selected name by replacing problematic characters
+clean_name=$(echo $selected_name | tr "./" "__")
+
+# Check if tmux is running, if not, start a new tmux session and attach
+if ! pgrep -x tmux > /dev/null; then
+    tmux new-session -s "$clean_name" -c "$selected" -d
+    tmux attach-session -t "$clean_name"
+    exit 0
+fi
+
+# If inside tmux, try to switch to or create the target window
+if [[ -n $TMUX ]]; then
+    # Try to get the current tmux session name
+    session_name=$(tmux display-message -p "#S")
+
+    # Form the target window name as session:window format
+    target="$session_name:$clean_name"
+
+    # Check if the window already exists, if not, create a new window
+    if ! tmux has-session -t $target 2> /dev/null; then
+        tmux new-window -dn $clean_name -c "$selected"
+    fi
+
+    # Switch to the target window
+    tmux select-window -t $target
+
+    # Optionally send keys to the newly created or existing window
+    if [[ $# -gt 0 ]]; then
+        shift
+        tmux send-keys -t $target "$*"
+    fi
+else
+    # If tmux is running but we are not inside a tmux session, attach to the session or create it if it does not exist
+    if ! tmux has-session -t "$clean_name" 2> /dev/null; then
+        tmux new-session -s "$clean_name" -c "$selected" -d
+    fi
+    tmux attach-session -t "$clean_name"
+    # Ensure to switch to the target window after attaching, necessary if the session already existed and had multiple windows
+    tmux select-window -t "$clean_name"
+fi
+

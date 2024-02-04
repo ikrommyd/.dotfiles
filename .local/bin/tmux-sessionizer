@@ -1,0 +1,42 @@
+#!/usr/bin/env bash
+
+# Check if exactly one argument is provided
+if [[ $# -eq 1 ]]; then
+    # If so, use that argument as the selected directory
+    selected=$1
+else
+    # If not, use fzf to let the user interactively pick a directory
+    # Searches within ~/fun and ~/Dropbox, limiting to directories directly within these locations or one level deep
+    selected=$(find ~/fun ~/Dropbox -mindepth 1 -maxdepth 2 -type d | fzf)
+fi
+
+# Exit the script if no directory was selected (e.g., user exited fzf without choosing)
+if [[ -z $selected ]]; then
+    exit 0
+fi
+
+# Sanitize the directory name by replacing periods with underscores,
+# to avoid issues with tmux session naming conventions
+selected_name=$(basename "$selected" | tr . _)
+
+# Check if tmux is currently running by looking for its process
+tmux_running=$(pgrep tmux)
+
+# If not inside a tmux session ($TMUX is unset) and tmux is not running,
+# start a new tmux session with the sanitized directory name as session name,
+# and change to the selected directory
+if [[ -z $TMUX ]] && [[ -z $tmux_running ]]; then
+    tmux new-session -s $selected_name -c $selected
+    exit 0
+fi
+
+# If tmux is running, but there's no session with the sanitized directory name,
+# create a new detached tmux session with that name and change to the selected directory
+if ! tmux has-session -t=$selected_name 2> /dev/null; then
+    tmux new-session -ds $selected_name -c $selected
+fi
+
+# Switch to the tmux client that is attached to the session with the sanitized directory name,
+# effectively bringing the user into the tmux session for the selected directory
+tmux switch-client -t $selected_name
+
