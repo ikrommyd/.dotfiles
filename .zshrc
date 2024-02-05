@@ -195,7 +195,7 @@ bindkey -s ^f "tmux-sessionizer\n"
 bindkey -s ^b "tmux-windowizer\n"
 
 fcd() {
-    local selected=$(find ~/fun ~/Dropbox -mindepth 1 -maxdepth 2 -type d | fzf)
+    local selected=$(find ~/work ~/fun ~/Dropbox -mindepth 1 -maxdepth 2 -type d | fzf)
 
     if [[ -n $selected ]]; then
         cd "$selected" || return

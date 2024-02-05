@@ -10,7 +10,7 @@ export PATH="$PATH:/Users/iason/Library/Python/3.11/bin"
 bind '"\C-f":"tmux-sessionizer\n"'
 
 fcd() {
-    local selected=$(find ~/fun ~/Dropbox -mindepth 1 -maxdepth 2 -type d | fzf)
+    local selected=$(find ~/work ~/fun ~/Dropbox -mindepth 1 -maxdepth 2 -type d | fzf)
 
     if [[ -n $selected ]]; then
         cd "$selected" || return
