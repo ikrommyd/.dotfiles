@@ -6,8 +6,8 @@ if [[ $# -eq 1 ]]; then
     selected=$1
 else
     # If not, use fzf to let the user interactively pick a directory
-    # Searches within ~/fun and ~/Dropbox, limiting to directories directly within these locations or one level deep
-    selected=$(find ~/fun ~/Dropbox -mindepth 1 -maxdepth 2 -type d | fzf)
+    # Searches within ~/work ~/fun and ~/Dropbox, limiting to directories directly within these locations or one level deep
+    selected=$(find ~/work ~/fun ~/Dropbox -mindepth 1 -maxdepth 2 -type d | fzf)
 fi
 
 # Exit the script if no directory was selected (e.g., user exited fzf without choosing)
