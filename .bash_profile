@@ -36,9 +36,8 @@ alias cmslpcgpu="ssh -Y ikrommyd@cmslpcgpu3.fnal.gov"
 alias kinitlx="kinit -f --password-file=/Users/iason/.ssh/pass_file_lxplus ikrommyd@CERN.CH"
 alias kinitlpc="kinit --password-file=/Users/iason/.ssh/pass_file_lpc ikrommyd@FNAL.GOV"
 
-alias myenv="conda activate myenv"
-alias rootenv="conda activate root_env"
-alias deac="conda deactivate"
+alias ma="mamba activate"
+alias deac="mamba deactivate"
 
 alias sleepon="python ~/disablesleep.py off"
 alias sleepoff="python ~/disablesleep.py on"
