@@ -1,42 +1,51 @@
 #!/usr/bin/env bash
 
+# Maximum length for tmux session name
+max_len=8
+
 # Check if exactly one argument is provided
 if [[ $# -eq 1 ]]; then
-    # If so, use that argument as the selected directory
+    # Use the argument as the selected directory
     selected=$1
 else
-    # If not, use fzf to let the user interactively pick a directory
-    # Searches within ~/work ~/fun and ~/Dropbox, limiting to directories directly within these locations or one level deep
+    # Interactively pick a directory
     selected=$(find ~/work ~/fun ~/Dropbox -mindepth 1 -maxdepth 2 -type d | fzf)
 fi
 
-# Exit the script if no directory was selected (e.g., user exited fzf without choosing)
+# Exit if no directory was selected
 if [[ -z $selected ]]; then
     exit 0
 fi
 
-# Sanitize the directory name by replacing periods with underscores,
-# to avoid issues with tmux session naming conventions
+# Sanitize the directory name for tmux
 selected_name=$(basename "$selected" | tr . _)
 
-# Check if tmux is currently running by looking for its process
-tmux_running=$(pgrep tmux)
+# Truncate if necessary
+if [[ ${#selected_name} -gt $max_len ]]; then
+    selected_name="${selected_name:0:$max_len}"
+fi
 
-# If not inside a tmux session ($TMUX is unset) and tmux is not running,
-# start a new tmux session with the sanitized directory name as session name,
-# and change to the selected directory
-if [[ -z $TMUX ]] && [[ -z $tmux_running ]]; then
-    tmux new-session -s $selected_name -c $selected
+# Check if tmux is running
+if ! pgrep -x tmux > /dev/null; then
+    # Start a new session if tmux isn't running
+    tmux new-session -s "$selected_name" -c "$selected" -d
+    tmux attach-session -t "$selected_name"
     exit 0
 fi
 
-# If tmux is running, but there's no session with the sanitized directory name,
-# create a new detached tmux session with that name and change to the selected directory
-if ! tmux has-session -t=$selected_name 2> /dev/null; then
-    tmux new-session -ds $selected_name -c $selected
+# Handle tmux server running with no client attached
+active_client=$(tmux list-clients -F "#{client_name}")
+if [[ -z "$active_client" ]]; then
+    # No active client, so directly attach to the new or existing session
+    if ! tmux has-session -t "$selected_name" 2> /dev/null; then
+        tmux new-session -s "$selected_name" -c "$selected" -d
+    fi
+    tmux attach-session -t "$selected_name"
+else
+    # Tmux is running and client is active, proceed with original logic
+    if ! tmux has-session -t "$selected_name" 2> /dev/null; then
+        tmux new-session -s "$selected_name" -c "$selected" -d
+    fi
+    tmux switch-client -t "$selected_name"
 fi
-
-# Switch to the tmux client that is attached to the session with the sanitized directory name,
-# effectively bringing the user into the tmux session for the selected directory
-tmux switch-client -t $selected_name
 
