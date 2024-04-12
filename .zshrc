@@ -15,7 +15,8 @@ export ZSH="$HOME/.oh-my-zsh"
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="robbyrussell"
+# ZSH_THEME="robbyrussell"
+ZSH_THEME="powerlevel10k/powerlevel10k"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -114,11 +115,19 @@ unsetopt share_history
 
 export EDITOR='nvim'
 
-alias lx="sshpass -f ~/.ssh/pass_file_lxplus ssh ikrommyd@lxplus.cern.ch"
-alias lxgpu="sshpass -f ~/.ssh/pass_file_lxplus ssh ikrommyd@lxplus-gpu.cern.ch"
-alias cmslpc="ssh -Y ikrommyd@cmslpc-sl7.fnal.gov"
-alias cmslpcgpu="ssh -Y ikrommyd@cmslpcgpu3.fnal.gov"
+alias lxplus="sshpass -f ~/.ssh/pass_file_lxplus ssh ikrommyd@lxplus.cern.ch"
+alias lxplus7="sshpass -f ~/.ssh/pass_file_lxplus ssh ikrommyd@lxplus7.cern.ch"
+alias lxplus8="sshpass -f ~/.ssh/pass_file_lxplus ssh ikrommyd@lpxplus8.cern.ch"
+alias lxplus9="sshpass -f ~/.ssh/pass_file_lxplus ssh ikrommyd@lxplus9.cern.ch"
+alias lxplusgpu="sshpass -f ~/.ssh/pass_file_lxplus ssh ikrommyd@lxplus-gpu.cern.ch"
+alias lxplusgpu8="sshpass -f ~/.ssh/pass_file_lxplus ssh ikrommyd@lxplus8-gpu.cern.ch"
 alias kinitlpc="kinit --password-file=/Users/iason/.ssh/pass_file_lpc ikrommyd@FNAL.GOV"
+alias cmslpcsl7="ssh -Y ikrommyd@cmslpc-sl7.fnal.gov"
+alias cmslpcel8="ssh -Y ikrommyd@cmslpc-el8.fnal.gov"
+alias cmslpcel9="ssh -Y ikrommyd@cmslpc-el9.fnal.gov"
+alias cmslpcgpu1="ssh -Y ikrommyd@cmslpcgpu1.fnal.gov"
+alias cmslpcgpu2="ssh -Y ikrommyd@cmslpcgpu2.fnal.gov"
+alias cmslpcgpu3="ssh -Y ikrommyd@cmslpcgpu3.fnal.gov"
 
 alias ma="mamba activate"
 alias deac="mamba deactivate"
@@ -136,9 +145,14 @@ export PATH="$PATH:/Library/TeX/texbin"
 export PATH="$PATH:/usr/local/bin:"
 export PATH="$PATH:/Users/iason/bin"
 
-export GOPATH=$HOME/go
+export GOPATH=$HOME/.go
 export GOROOT="$(brew --prefix golang)/libexec"
 export PATH="$PATH:${GOPATH}/bin:${GOROOT}/bin"
+
+export X509_VOMS_DIR=~/.grid-security/vomsdir
+alias proxy="voms-proxy-init --voms cms --valid 168:00  --vomses ~/.grid-security/vomses/"
+alias dasgoclient="~/dasgoclient/dasgoclient_osx_aarch64"
+
 
 [ -f /opt/homebrew/etc/profile.d/autojump.sh ] && . /opt/homebrew/etc/profile.d/autojump.sh
 
@@ -200,3 +214,5 @@ fcd() {
         cd "$selected" || return
     fi
 }
+
+eval "$(atuin init zsh --disable-ctrl-r)"

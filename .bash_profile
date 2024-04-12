@@ -19,7 +19,7 @@ export PATH="$PATH:/Library/TeX/texbin"
 export PATH="$PATH:/usr/local/bin:"
 export PATH="$PATH:/Users/iason/bin"
 
-export GOPATH=$HOME/go
+export GOPATH=$HOME/.go
 export GOROOT="$(brew --prefix golang)/libexec"
 export PATH="$PATH:${GOPATH}/bin:${GOROOT}/bin"
 
@@ -29,12 +29,19 @@ if [ -f ~/.git-completion.bash ]; then
   . ~/.git-completion.bash
 fi
 
-alias lx="sshpass -f ~/.ssh/pass_file_lxplus ssh ikrommyd@lxplus.cern.ch"
-alias lxgpu="sshpass -f ~/.ssh/pass_file_lxplus ssh ikrommyd@lxplus-gpu.cern.ch"
-alias cmslpc="ssh -Y ikrommyd@cmslpc-sl7.fnal.gov"
-alias cmslpcgpu="ssh -Y ikrommyd@cmslpcgpu3.fnal.gov"
-alias kinitlx="kinit -f --password-file=/Users/iason/.ssh/pass_file_lxplus ikrommyd@CERN.CH"
+alias lxplus="sshpass -f ~/.ssh/pass_file_lxplus ssh ikrommyd@lxplus.cern.ch"
+alias lxplus7="sshpass -f ~/.ssh/pass_file_lxplus ssh ikrommyd@lxplus7.cern.ch"
+alias lxplus8="sshpass -f ~/.ssh/pass_file_lxplus ssh ikrommyd@lpxplus8.cern.ch"
+alias lxplus9="sshpass -f ~/.ssh/pass_file_lxplus ssh ikrommyd@lxplus9.cern.ch"
+alias lxplusgpu="sshpass -f ~/.ssh/pass_file_lxplus ssh ikrommyd@lxplus-gpu.cern.ch"
+alias lxplusgpu8="sshpass -f ~/.ssh/pass_file_lxplus ssh ikrommyd@lxplus8-gpu.cern.ch"
 alias kinitlpc="kinit --password-file=/Users/iason/.ssh/pass_file_lpc ikrommyd@FNAL.GOV"
+alias cmslpcsl7="ssh -Y ikrommyd@cmslpc-sl7.fnal.gov"
+alias cmslpcel8="ssh -Y ikrommyd@cmslpc-el8.fnal.gov"
+alias cmslpcel9="ssh -Y ikrommyd@cmslpc-el9.fnal.gov"
+alias cmslpcgpu1="ssh -Y ikrommyd@cmslpcgpu1.fnal.gov"
+alias cmslpcgpu2="ssh -Y ikrommyd@cmslpcgpu2.fnal.gov"
+alias cmslpcgpu3="ssh -Y ikrommyd@cmslpcgpu3.fnal.gov"
 
 alias ma="mamba activate"
 alias deac="mamba deactivate"
@@ -69,6 +76,10 @@ export PATH="$PATH:/Users/iason/Library/Python/3.11/bin"
 export MODULAR_HOME="/Users/iason/.modular"
 export PATH="/Users/iason/.modular/pkg/packages.modular.com_mojo/bin:$PATH"
 
+export X509_VOMS_DIR=~/.grid-security/vomsdir
+alias proxy="voms-proxy-init --voms cms --valid 168:00  --vomses ~/.grid-security/vomses/"
+alias dasgoclient="~/dasgoclient/dasgoclient_osx_aarch64"
+
 # c.f.Richard McElreath's 2024-01-26 tweet
 # https://twitter.com/rlmcelreath/status/1750807826883027304/
 function bibtex-from-doi () {
@@ -87,3 +98,4 @@ function bibtex-from-doi () {
     fi
     curl --location --header "Accept: application/x-bibtex" "https://doi.org/${doi}"
 }
+. "$HOME/.cargo/env"
