@@ -8,6 +8,7 @@ export PATH="$PATH:/Users/iason/Library/Python/3.11/bin"
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
 bind '"\C-f":"tmux-sessionizer\n"'
+alias ta="tmux a -t"
 
 fcd() {
     local selected=$(find ~/work ~/fun ~/Dropbox -mindepth 1 -maxdepth 2 -type d | fzf)
@@ -16,4 +17,8 @@ fcd() {
         cd "$selected" || return
     fi
 }
-
+. "$HOME/.cargo/env"
+export PYENV_ROOT="$HOME/.pyenv"
+command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"

@@ -1,5 +1,8 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhistcnt =4
+let g:netrw_dirhistcnt =7
+let g:netrw_dirhist_7='/Users/iason/work/egamma_dev/egamma-tnp'
+let g:netrw_dirhist_6='/Users/iason/work/egamma_dev/egamma-tnp/tests'
+let g:netrw_dirhist_5='/Users/iason/work/egamma_dev/egamma-tnp'
 let g:netrw_dirhist_4='/Users/iason/work/zfit_dev/zfit/zfit/models'
 let g:netrw_dirhist_3='/Users/iason/work/zfit_dev/zfit/zfit'
 let g:netrw_dirhist_2='/Users/iason/work/zfit_dev/zfit'
@@ -7,6 +10,3 @@ let g:netrw_dirhist_1='/Users/iason/.config/nvim'
 let g:netrw_dirhist_0='/Users/iason/fun/aoc2023'
 let g:netrw_dirhist_9='/Users/iason/.config'
 let g:netrw_dirhist_8='/Users/iason/.config/nvim'
-let g:netrw_dirhist_7='/Users/iason/.config/nvim/lua/scylet'
-let g:netrw_dirhist_6='/Users/iason/.config/nvim/lua'
-let g:netrw_dirhist_5='/Users/iason/.config/nvim'

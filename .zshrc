@@ -15,8 +15,8 @@ export ZSH="$HOME/.oh-my-zsh"
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-# ZSH_THEME="robbyrussell"
-ZSH_THEME="powerlevel10k/powerlevel10k"
+ZSH_THEME="robbyrussell"
+# ZSH_THEME="powerlevel10k/powerlevel10k"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -117,7 +117,7 @@ export EDITOR='nvim'
 
 alias lxplus="sshpass -f ~/.ssh/pass_file_lxplus ssh ikrommyd@lxplus.cern.ch"
 alias lxplus7="sshpass -f ~/.ssh/pass_file_lxplus ssh ikrommyd@lxplus7.cern.ch"
-alias lxplus8="sshpass -f ~/.ssh/pass_file_lxplus ssh ikrommyd@lpxplus8.cern.ch"
+alias lxplus8="sshpass -f ~/.ssh/pass_file_lxplus ssh ikrommyd@lxplus8.cern.ch"
 alias lxplus9="sshpass -f ~/.ssh/pass_file_lxplus ssh ikrommyd@lxplus9.cern.ch"
 alias lxplusgpu="sshpass -f ~/.ssh/pass_file_lxplus ssh ikrommyd@lxplus-gpu.cern.ch"
 alias lxplusgpu8="sshpass -f ~/.ssh/pass_file_lxplus ssh ikrommyd@lxplus8-gpu.cern.ch"
@@ -206,6 +206,7 @@ function bibtex-from-doi () {
 
 bindkey -s ^f "tmux-sessionizer\n"
 bindkey -s ^b "tmux-windowizer\n"
+alias ta="tmux a -t"
 
 fcd() {
     local selected=$(find ~/work ~/fun ~/Dropbox -mindepth 1 -maxdepth 2 -type d | fzf)
@@ -216,3 +217,14 @@ fcd() {
 }
 
 eval "$(atuin init zsh --disable-ctrl-r)"
+
+export GPG_TTY=$(tty)
+export PYENV_ROOT="$HOME/.pyenv"
+[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
+
+export ROOTSYS=/opt/homebrew/Cellar/root/6.32.02
+export PATH=$PATH:$ROOTSYS/bin
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$ROOTSYS/lib
+export DYLD_LIBRARY_PATH=$DYLD_LIBRARY_PATH:$ROOTSYS/lib

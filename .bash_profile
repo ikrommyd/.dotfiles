@@ -31,7 +31,7 @@ fi
 
 alias lxplus="sshpass -f ~/.ssh/pass_file_lxplus ssh ikrommyd@lxplus.cern.ch"
 alias lxplus7="sshpass -f ~/.ssh/pass_file_lxplus ssh ikrommyd@lxplus7.cern.ch"
-alias lxplus8="sshpass -f ~/.ssh/pass_file_lxplus ssh ikrommyd@lpxplus8.cern.ch"
+alias lxplus8="sshpass -f ~/.ssh/pass_file_lxplus ssh ikrommyd@lxplus8.cern.ch"
 alias lxplus9="sshpass -f ~/.ssh/pass_file_lxplus ssh ikrommyd@lxplus9.cern.ch"
 alias lxplusgpu="sshpass -f ~/.ssh/pass_file_lxplus ssh ikrommyd@lxplus-gpu.cern.ch"
 alias lxplusgpu8="sshpass -f ~/.ssh/pass_file_lxplus ssh ikrommyd@lxplus8-gpu.cern.ch"
@@ -99,3 +99,8 @@ function bibtex-from-doi () {
     curl --location --header "Accept: application/x-bibtex" "https://doi.org/${doi}"
 }
 . "$HOME/.cargo/env"
+
+export GPG_TTY=$(tty)
+export PYENV_ROOT="$HOME/.pyenv"
+[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
