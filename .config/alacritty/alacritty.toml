@@ -1,4 +1,4 @@
-import = [
+general.import = [
     "~/.config/alacritty/themes/themes/gruvbox_dark.toml"
 ]
 
@@ -18,9 +18,15 @@ padding.x = 10
 decorations = "Buttonless"
 option_as_alt = "Both"
 
-[shell]
+[terminal.shell]
 program = "/bin/zsh"
 args = ["--login", "-c", "cd ~; exec $SHELL"]
 
 [colors]
 draw_bold_text_with_bright_colors = true
+
+[keyboard]
+bindings = [
+    { key = "N", mods = "Command", action = "CreateNewWindow" },
+    { key = "T", mods = "COmmand", action = "CreateNewTab" },
+]
