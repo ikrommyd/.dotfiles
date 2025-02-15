@@ -4,7 +4,7 @@
 max_len=10
 
 # Select a directory using fzf from predefined paths
-selected=$(find ~/work ~/fun ~/Dropbox -mindepth 1 -maxdepth 2 -type d | fzf)
+selected=$(find ~/work/ ~/fun/ ~/Dropbox/ -mindepth 1 -maxdepth 2 -type d | fzf)
 
 # Exit if no selection is made
 if [[ -z $selected ]]; then

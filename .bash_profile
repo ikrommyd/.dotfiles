@@ -63,22 +63,14 @@ else
     fi
 fi
 unset __conda_setup
-
-if [ -f "/Users/iason/miniforge3/etc/profile.d/mamba.sh" ]; then
-    . "/Users/iason/miniforge3/etc/profile.d/mamba.sh"
-fi
 # <<< conda initialize <<<
 
-
-# Created by `pipx` on 2023-11-23 18:25:26
-export PATH="$PATH:/Users/iason/Library/Python/3.11/bin"
 
 export MODULAR_HOME="/Users/iason/.modular"
 export PATH="/Users/iason/.modular/pkg/packages.modular.com_mojo/bin:$PATH"
 
 export X509_VOMS_DIR=~/.grid-security/vomsdir
 alias proxy="voms-proxy-init --voms cms --valid 168:00  --vomses ~/.grid-security/vomses/"
-alias dasgoclient="~/dasgoclient/dasgoclient_osx_aarch64"
 
 # c.f.Richard McElreath's 2024-01-26 tweet
 # https://twitter.com/rlmcelreath/status/1750807826883027304/
@@ -101,6 +93,18 @@ function bibtex-from-doi () {
 . "$HOME/.cargo/env"
 
 export GPG_TTY=$(tty)
-export PYENV_ROOT="$HOME/.pyenv"
-[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init -)"
+
+alias thisroot="source $HOMEBREW_PREFIX/bin/thisroot.sh"
+
+# >>> mamba initialize >>>
+# !! Contents within this block are managed by 'mamba shell init' !!
+export MAMBA_EXE='/Users/iason/miniforge3/condabin/mamba';
+export MAMBA_ROOT_PREFIX='/Users/iason/miniforge3';
+__mamba_setup="$("$MAMBA_EXE" shell hook --shell bash --root-prefix "$MAMBA_ROOT_PREFIX" 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__mamba_setup"
+else
+    alias mamba="$MAMBA_EXE"  # Fallback on help from mamba activate
+fi
+unset __mamba_setup
+# <<< mamba initialize <<<

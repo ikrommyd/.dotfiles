@@ -6,7 +6,7 @@
 #: individual font faces and even specify special fonts for particular
 #: characters.
 
-font_family      MesloLGS NF Regular
+font_family      MesloLGS Nerd Font Mono
 # bold_font        auto
 # italic_font      auto
 # bold_italic_font auto
@@ -24,7 +24,7 @@ font_family      MesloLGS NF Regular
 #:     italic_font      Operator Mono Book Italic
 #:     bold_italic_font Operator Mono Medium Italic
 
-# font_size 11.0
+font_size 13.0
 
 #: Font size (in pts)
 
@@ -285,7 +285,7 @@ cursor_blink_interval 0.75
 #: disable blinking. Negative values mean use system default. Note
 #: that the minimum interval will be limited to repaint_delay.
 
-cursor_stop_blinking_after 5.0
+cursor_stop_blinking_after 0.0
 
 #: Stop blinking cursor after the specified number of seconds of
 #: keyboard inactivity. Set to zero to never stop blinking.
@@ -682,7 +682,7 @@ cursor_stop_blinking_after 5.0
 
 #: Terminal bell {{{
 
-# enable_audio_bell yes
+enable_audio_bell no
 
 #: The audio bell. Useful to disable it in environments that require
 #: silence.
@@ -691,7 +691,6 @@ cursor_stop_blinking_after 5.0
 
 #: The visual bell duration (in seconds). Flash the screen when a bell
 #: occurs for the specified number of seconds. Set to zero to disable.
-
 # visual_bell_color none
 
 #: The color used by visual bell. Set to none will fall back to
@@ -740,8 +739,8 @@ cursor_stop_blinking_after 5.0
 #: Window layout {{{
 
 # remember_window_size  yes
-# initial_window_width  640
-# initial_window_height 400
+initial_window_width  400
+initial_window_height 400
 
 #: If enabled, the OS Window size will be remembered so that new
 #: instances of kitty will have the same size as the previous
@@ -796,7 +795,7 @@ cursor_stop_blinking_after 5.0
 #: set the vertical and horizontal sides. Three values set top,
 #: horizontal and bottom. Four values set top, right, bottom and left.
 
-# window_padding_width 0
+window_padding_width 10
 
 #: The window padding (in pts) (blank area between the text and the
 #: window border). A single value sets all four sides. Two values set
@@ -831,7 +830,7 @@ cursor_stop_blinking_after 5.0
 #: Fade the text in inactive windows by the specified amount (a number
 #: between zero and one, with zero being fully faded).
 
-# hide_window_decorations no
+hide_window_decorations yes
 
 #: Hide the window decorations (title-bar and window borders) with
 #: yes. On macOS, titlebar-only and titlebar-and-corners can be used
@@ -1420,7 +1419,7 @@ cursor_stop_blinking_after 5.0
 #: in the path are expanded. Changing this option by reloading the
 #: config is not supported.
 
-# clipboard_control write-clipboard write-primary read-clipboard-ask read-primary-ask
+clipboard_control write-clipboard write-primary read-clipboard-ask read-primary-ask
 
 #: Allow programs running in kitty to read and write from the
 #: clipboard. You can control exactly which actions are allowed. The
@@ -2071,6 +2070,16 @@ cursor_stop_blinking_after 5.0
 #:     map ctrl+alt+1 goto_tab 1
 #:     map ctrl+alt+2 goto_tab 2
 
+map cmd+1 goto_tab 1
+map cmd+2 goto_tab 2
+map cmd+3 goto_tab 3
+map cmd+4 goto_tab 4
+map cmd+5 goto_tab 5
+map cmd+6 goto_tab 6
+map cmd+7 goto_tab 7
+map cmd+8 goto_tab 8
+map cmd+9 goto_tab 9
+
 #: Just as with new_window above, you can also pass the name of
 #: arbitrary commands to run when using new_tab and new_tab_with_cwd.
 #: Finally, if you want the new tab to open next to the current tab
@@ -2209,6 +2218,7 @@ cursor_stop_blinking_after 5.0
 #: }}}
 
 #: Miscellaneous {{{
+#
 
 #: Show documentation
 
@@ -2401,8 +2411,9 @@ cursor_stop_blinking_after 5.0
 
 #: }}}
 
+map cmd+f launch --type=overlay --stdin-source=@screen_scrollback /bin/sh -c "/opt/homebrew/bin/fzf --no-sort --no-mouse --exact -i --tac | kitty +kitten clipboard"
 
 # BEGIN_KITTY_THEME
-# Tango Dark
+# One Dark
 include current-theme.conf
 # END_KITTY_THEME

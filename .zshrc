@@ -151,36 +151,13 @@ export PATH="$PATH:${GOPATH}/bin:${GOROOT}/bin"
 
 export X509_VOMS_DIR=~/.grid-security/vomsdir
 alias proxy="voms-proxy-init --voms cms --valid 168:00  --vomses ~/.grid-security/vomses/"
-alias dasgoclient="~/dasgoclient/dasgoclient_osx_aarch64"
 
 
 [ -f /opt/homebrew/etc/profile.d/autojump.sh ] && . /opt/homebrew/etc/profile.d/autojump.sh
 
 
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/Users/iason/miniforge3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/Users/iason/miniforge3/etc/profile.d/conda.sh" ]; then
-        . "/Users/iason/miniforge3/etc/profile.d/conda.sh"
-    else
-        export PATH="/Users/iason/miniforge3/bin:$PATH"
-    fi
-fi
-unset __conda_setup
-
-if [ -f "/Users/iason/miniforge3/etc/profile.d/mamba.sh" ]; then
-    . "/Users/iason/miniforge3/etc/profile.d/mamba.sh"
-fi
-# <<< conda initialize <<<
-
 export MODULAR_HOME="/Users/iason/.modular"
 export PATH="/Users/iason/.modular/pkg/packages.modular.com_mojo/bin:$PATH"
-
-# Created by `pipx` on 2024-01-12 19:50:48
-export PATH="$PATH:/Users/iason/Library/Python/3.11/bin"
 
 # c.f.Richard McElreath's 2024-01-26 tweet
 # https://twitter.com/rlmcelreath/status/1750807826883027304/
@@ -203,28 +180,55 @@ function bibtex-from-doi () {
 
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+bindkey "${key[Up]}" fzf-history-widget
 
 bindkey -s ^f "tmux-sessionizer\n"
 bindkey -s ^b "tmux-windowizer\n"
 alias ta="tmux a -t"
 
 fcd() {
-    local selected=$(find ~/work ~/fun ~/Dropbox -mindepth 1 -maxdepth 2 -type d | fzf)
+    local selected=$(find ~/work/ ~/fun/ ~/Dropbox/ -mindepth 1 -maxdepth 2 -type d | fzf)
 
     if [[ -n $selected ]]; then
         cd "$selected" || return
     fi
 }
 
-eval "$(atuin init zsh --disable-ctrl-r)"
-
 export GPG_TTY=$(tty)
 export PYENV_ROOT="$HOME/.pyenv"
 [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init -)"
-eval "$(pyenv virtualenv-init -)"
 
-export ROOTSYS=/opt/homebrew/Cellar/root/6.32.02
-export PATH=$PATH:$ROOTSYS/bin
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$ROOTSYS/lib
-export DYLD_LIBRARY_PATH=$DYLD_LIBRARY_PATH:$ROOTSYS/lib
+eval $(thefuck --alias)
+
+alias thisroot="source ~/software/root/root_install/bin/thisroot.sh"
+alias source-util-linux='export PATH="/opt/homebrew/opt/util-linux/bin:$PATH"; export PATH="/opt/homebrew/opt/util-linux/sbin:$PATH"'
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/Users/iason/miniforge3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/Users/iason/miniforge3/etc/profile.d/conda.sh" ]; then
+        . "/Users/iason/miniforge3/etc/profile.d/conda.sh"
+    else
+        export PATH="/Users/iason/miniforge3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+
+
+# >>> mamba initialize >>>
+# !! Contents within this block are managed by 'mamba shell init' !!
+export MAMBA_EXE='/Users/iason/miniforge3/condabin/mamba';
+export MAMBA_ROOT_PREFIX='/Users/iason/miniforge3';
+__mamba_setup="$("$MAMBA_EXE" shell hook --shell zsh --root-prefix "$MAMBA_ROOT_PREFIX" 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__mamba_setup"
+else
+    alias mamba="$MAMBA_EXE"  # Fallback on help from mamba activate
+fi
+unset __mamba_setup
+# <<< mamba initialize <<<
+export PATH="/Users/iason/.pixi/bin:$PATH"

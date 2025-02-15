@@ -9,7 +9,7 @@ if [[ $# -eq 1 ]]; then
     selected=$1
 else
     # Interactively pick a directory
-    selected=$(find ~/work ~/fun ~/Dropbox -mindepth 1 -maxdepth 2 -type d | fzf)
+    selected=$(find ~/work/ ~/fun/ ~/Dropbox/ -mindepth 1 -maxdepth 2 -type d | fzf)
 fi
 
 # Exit if no directory was selected
