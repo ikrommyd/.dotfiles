@@ -232,3 +232,43 @@ fi
 unset __mamba_setup
 # <<< mamba initialize <<<
 export PATH="/Users/iason/.pixi/bin:$PATH"
+
+export PATH="$PATH:/Users/iason/.modular/bin"
+eval "$(magic completion --shell zsh)"
+# The following lines have been added by Docker Desktop to enable Docker CLI completions.
+fpath=(/Users/iason/.docker/completions $fpath)
+autoload -Uz compinit
+compinit
+# End of Docker CLI completions
+
+export PATH="$PATH:/opt/nvim-macos-arm64/bin"
+
+nvim-scylet() {
+  env NVIM_APPNAME=nvim-scylet /opt/nvim-macos-arm64/bin/nvim "$@"
+}
+nvim-lazy() {
+  env NVIM_APPNAME=nvim-lazy /opt/nvim-macos-arm64/bin/nvim "$@"
+}
+
+export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS \
+  --highlight-line \
+  --info=inline-right \
+  --ansi \
+  --border=none \
+  --color=bg+:#283457 \
+  --color=bg:#16161e \
+  --color=border:#27a1b9 \
+  --color=fg:#c0caf5 \
+  --color=gutter:#16161e \
+  --color=header:#ff9e64 \
+  --color=hl+:#2ac3de \
+  --color=hl:#2ac3de \
+  --color=info:#545c7e \
+  --color=marker:#ff007c \
+  --color=pointer:#ff007c \
+  --color=prompt:#2ac3de \
+  --color=query:#c0caf5:regular \
+  --color=scrollbar:#27a1b9 \
+  --color=separator:#ff9e64 \
+  --color=spinner:#ff007c \
+"
