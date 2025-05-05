@@ -74,25 +74,51 @@ disabled = false
 style = "bg:surface0 fg:text"
 
 [os.symbols]
-Windows = "󰍲"
-Ubuntu = "󰕈"
-SUSE = ""
-Raspbian = "󰐿"
-Mint = "󰣭"
-Macos = ""
-Manjaro = ""
-Linux = "󰌽"
-Gentoo = "󰣨"
-Fedora = "󰣛"
-Alpine = ""
-Amazon = ""
-Android = ""
-Arch = "󰣇"
-Artix = "󰣇"
-CentOS = ""
-Debian = "󰣚"
-Redhat = "󱄛"
-RedHatEnterprise = "󱄛"
+Alpaquita = " "
+Alpine = " "
+AlmaLinux = " "
+Amazon = " "
+Android = " "
+Arch = " "
+Artix = " "
+CachyOS = " "
+CentOS = " "
+Debian = " "
+DragonFly = " "
+Emscripten = " "
+EndeavourOS = " "
+Fedora = " "
+FreeBSD = " "
+Garuda = "󰛓 "
+Gentoo = " "
+HardenedBSD = "󰞌 "
+Illumos = "󰈸 "
+Kali = " "
+Linux = " "
+Mabox = " "
+Macos = " "
+Manjaro = " "
+Mariner = " "
+MidnightBSD = " "
+Mint = " "
+NetBSD = " "
+NixOS = " "
+Nobara = " "
+OpenBSD = "󰈺 "
+openSUSE = " "
+OracleLinux = "󰌷 "
+Pop = " "
+Raspbian = " "
+Redhat = " "
+RedHatEnterprise = " "
+RockyLinux = " "
+Redox = "󰀘 "
+Solus = "󰠳 "
+SUSE = " "
+Ubuntu = " "
+Unknown = " "
+Void = " "
+Windows = "󰍲 "
 
 [username]
 show_always = true
@@ -105,6 +131,7 @@ style = "fg:mantle bg:peach"
 format = "[ $path ]($style)"
 truncation_length = 3
 truncation_symbol = "…/"
+read_only = " 󰌾"
 
 [directory.substitutions]
 "Documents" = "󰈙 "
@@ -113,17 +140,18 @@ truncation_symbol = "…/"
 "Pictures" = " "
 "Developer" = "󰲋 "
 
-[git_branch]
-symbol = ""
+[aws]
+symbol = " "
 style = "bg:teal"
-format = '[[ $symbol $branch ](fg:base bg:green)]($style)'
+format = '[[ $symbol( $profile) ](fg:base bg:teal)]($style)'
 
-[git_status]
+[buf]
+symbol = " "
 style = "bg:teal"
-format = '[[($all_status$ahead_behind )](fg:base bg:green)]($style)'
+format = '[[ $symbol( $version) ](fg:base bg:teal)]($style)'
 
-[nodejs]
-symbol = ""
+[bun]
+symbol = " "
 style = "bg:teal"
 format = '[[ $symbol( $version) ](fg:base bg:teal)]($style)'
 
@@ -132,52 +160,226 @@ symbol = " "
 style = "bg:teal"
 format = '[[ $symbol( $version) ](fg:base bg:teal)]($style)'
 
-[rust]
-symbol = ""
+[cpp]
+symbol = " "
 style = "bg:teal"
 format = '[[ $symbol( $version) ](fg:base bg:teal)]($style)'
+
+[cmake]
+symbol = " "
+style = "bg:teal"
+format = '[[ $symbol( $version) ](fg:base bg:teal)]($style)'
+
+[conda]
+disabled = false
+symbol = " "
+style = "bg:teal"
+format = '[[ $symbol $environment ](fg:base bg:teal)]($style)'
+ignore_base = false
+
+[crystal]
+symbol = " "
+style = "bg:teal"
+format = '[[ $symbol( $version) ](fg:base bg:teal)]($style)'
+
+[dart]
+symbol = " "
+style = "bg:teal"
+format = '[[ $symbol( $version) ](fg:base bg:teal)]($style)'
+
+[deno]
+symbol = " "
+style = "bg:teal"
+format = '[[ $symbol( $version) ](fg:base bg:teal)]($style)'
+
+[docker_context]
+symbol = " "
+style = "bg:mantle"
+format = '[[ $symbol( $context) ](fg:#83a598 bg:color_bg3)]($style)'
+
+[elixir]
+symbol = " "
+style = "bg:teal"
+format = '[[ $symbol( $version) ](fg:base bg:teal)]($style)'
+
+[elm]
+symbol = " "
+style = "bg:teal"
+format = '[[ $symbol( $version) ](fg:base bg:teal)]($style)'
+
+[fennel]
+symbol = " "
+style = "bg:teal"
+format = '[[ $symbol( $version) ](fg:base bg:teal)]($style)'
+
+[fossil_branch]
+symbol = " "
+style = "bg:teal"
+format = '[[ $symbol( $branch) ](fg:base bg:teal)]($style)'
+
+[gcloud]
+symbol = "  "
+style = "bg:teal"
+format = '[[ $symbol( $project) ](fg:base bg:teal)]($style)'
+
+[git_branch]
+symbol = " "
+style = "bg:teal"
+format = '[[ $symbol $branch ](fg:base bg:green)]($style)'
+
+[git_status]
+style = "bg:teal"
+format = '[[($all_status$ahead_behind )](fg:base bg:green)]($style)'
+
+[git_commit]
+tag_symbol = '  '
+style = "bg:teal"
+format = '[[($all_status$ahead_behind )](fg:base bg:green)]($style)'
 
 [golang]
-symbol = ""
+symbol = " "
 style = "bg:teal"
 format = '[[ $symbol( $version) ](fg:base bg:teal)]($style)'
 
-[php]
-symbol = ""
+[guix_shell]
+symbol = " "
 style = "bg:teal"
 format = '[[ $symbol( $version) ](fg:base bg:teal)]($style)'
+
+[haskell]
+symbol = " "
+style = "bg:teal"
+format = '[[ $symbol( $version) ](fg:base bg:teal)]($style)'
+
+[haxe]
+symbol = " "
+style = "bg:teal"
+format = '[[ $symbol( $version) ](fg:base bg:teal)]($style)'
+
+[hg_branch]
+symbol = " "
+style = "bg:teal"
+format = '[[ $symbol( $branch) ](fg:base bg:teal)]($style)'
+
+[hostname]
+ssh_symbol = " "
+style = "bg:surface0 fg:text"
+format = '[ $hostname ]($style)'
 
 [java]
 symbol = " "
 style = "bg:teal"
 format = '[[ $symbol( $version) ](fg:base bg:teal)]($style)'
 
-[kotlin]
-symbol = ""
+[julia]
+symbol = " "
 style = "bg:teal"
 format = '[[ $symbol( $version) ](fg:base bg:teal)]($style)'
 
-[haskell]
-symbol = ""
+[kotlin]
+symbol = " "
+style = "bg:teal"
+format = '[[ $symbol( $version) ](fg:base bg:teal)]($style)'
+
+[lua]
+symbol = " "
+style = "bg:teal"
+format = '[[ $symbol( $version) ](fg:base bg:teal)]($style)'
+
+[memory_usage]
+symbol = "󰍛 "
+style = "bg:teal"
+format = '[[ $symbol( $used ) ](fg:base bg:teal)]($style)'
+
+[meson]
+symbol = "󰔷 "
+style = "bg:teal"
+format = '[[ $symbol( $version) ](fg:base bg:teal)]($style)'
+
+[nim]
+symbol = "󰆥 "
+style = "bg:teal"
+format = '[[ $symbol( $version) ](fg:base bg:teal)]($style)'
+
+[nix_shell]
+symbol = " "
+style = "bg:teal"
+format = '[[ $symbol( $version) ](fg:base bg:teal)]($style)'
+
+[nodejs]
+symbol = " "
+style = "bg:teal"
+format = '[[ $symbol( $version) ](fg:base bg:teal)]($style)'
+
+[ocaml]
+symbol = " "
+style = "bg:teal"
+format = '[[ $symbol( $version) ](fg:base bg:teal)]($style)'
+
+[package]
+symbol = "󰏗 "
+style = "bg:teal"
+format = '[[ $symbol( $version) ](fg:base bg:teal)]($style)'
+
+[perl]
+symbol = " "
+style = "bg:teal"
+format = '[[ $symbol( $version) ](fg:base bg:teal)]($style)'
+
+[php]
+symbol = " "
+style = "bg:teal"
+format = '[[ $symbol( $version) ](fg:base bg:teal)]($style)'
+
+[pijul_channel]
+symbol = " "
+style = "bg:teal"
+format = '[[ $symbol( $channel) ](fg:base bg:teal)]($style)'
+
+[pixi]
+symbol = "󰏗 "
 style = "bg:teal"
 format = '[[ $symbol( $version) ](fg:base bg:teal)]($style)'
 
 [python]
-symbol = ""
+symbol = " "
 style = "bg:teal"
 format = '[[ $symbol( $version) ](fg:base bg:teal)]($style)'
 
-[conda]
-disabled = false
-symbol = "🅒"  # Or any icon you prefer
+[rlang]
+symbol = "󰟔 "
 style = "bg:teal"
-format = '[[ $symbol $environment ](fg:base bg:teal)]($style)'
-ignore_base = false
+format = '[[ $symbol( $version) ](fg:base bg:teal)]($style)'
 
-[docker_context]
-symbol = ""
-style = "bg:mantle"
-format = '[[ $symbol( $context) ](fg:#83a598 bg:color_bg3)]($style)'
+[ruby]
+symbol = " "
+style = "bg:teal"
+format = '[[ $symbol( $version) ](fg:base bg:teal)]($style)'
+
+[rust]
+symbol = "󱘗 "
+style = "bg:teal"
+format = '[[ $symbol( $version) ](fg:base bg:teal)]($style)'
+
+[scala]
+symbol = " "
+style = "bg:teal"
+format = '[[ $symbol( $version) ](fg:base bg:teal)]($style)'
+
+[swift]
+symbol = " "
+style = "bg:teal"
+format = '[[ $symbol( $version) ](fg:base bg:teal)]($style)'
+
+[zig]
+symbol = " "
+style = "bg:teal"
+format = '[[ $symbol( $version) ](fg:base bg:teal)]($style)'
+
+[gradle]
+symbol = " "
+style = "bg:teal"
+format = '[[ $symbol( $version) ](fg:base bg:teal)]($style)'
 
 [time]
 disabled = false
