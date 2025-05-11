@@ -226,6 +226,7 @@ format = '[[ $symbol( $project) ](fg:base bg:teal)]($style)'
 symbol = " "
 style = "bg:teal"
 format = '[[ $symbol $branch ](fg:base bg:green)]($style)'
+truncation_length = 20
 
 [git_status]
 style = "bg:teal"
