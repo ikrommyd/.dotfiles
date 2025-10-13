@@ -18,3 +18,18 @@ fcd() {
     fi
 }
 . "$HOME/.cargo/env"
+
+# >>> juliaup initialize >>>
+
+# !! Contents within this block are managed by juliaup !!
+
+case ":$PATH:" in
+    *:/Users/iason/.juliaup/bin:*)
+        ;;
+
+    *)
+        export PATH=/Users/iason/.juliaup/bin${PATH:+:${PATH}}
+        ;;
+esac
+
+# <<< juliaup initialize <<<

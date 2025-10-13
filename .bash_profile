@@ -50,22 +50,6 @@ alias sleepon="python ~/disablesleep.py off"
 alias sleepoff="python ~/disablesleep.py on"
 
 
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/Users/iason/miniforge3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/Users/iason/miniforge3/etc/profile.d/conda.sh" ]; then
-        . "/Users/iason/miniforge3/etc/profile.d/conda.sh"
-    else
-        export PATH="/Users/iason/miniforge3/bin:$PATH"
-    fi
-fi
-unset __conda_setup
-# <<< conda initialize <<<
-
-
 export MODULAR_HOME="/Users/iason/.modular"
 export PATH="/Users/iason/.modular/pkg/packages.modular.com_mojo/bin:$PATH"
 
@@ -96,15 +80,18 @@ export GPG_TTY=$(tty)
 
 alias thisroot="source $HOMEBREW_PREFIX/bin/thisroot.sh"
 
-# >>> mamba initialize >>>
-# !! Contents within this block are managed by 'mamba shell init' !!
-export MAMBA_EXE='/Users/iason/miniforge3/condabin/mamba';
-export MAMBA_ROOT_PREFIX='/Users/iason/miniforge3';
-__mamba_setup="$("$MAMBA_EXE" shell hook --shell bash --root-prefix "$MAMBA_ROOT_PREFIX" 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__mamba_setup"
-else
-    alias mamba="$MAMBA_EXE"  # Fallback on help from mamba activate
-fi
-unset __mamba_setup
-# <<< mamba initialize <<<
+
+# >>> juliaup initialize >>>
+
+# !! Contents within this block are managed by juliaup !!
+
+case ":$PATH:" in
+    *:/Users/iason/.juliaup/bin:*)
+        ;;
+
+    *)
+        export PATH=/Users/iason/.juliaup/bin${PATH:+:${PATH}}
+        ;;
+esac
+
+# <<< juliaup initialize <<<

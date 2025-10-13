@@ -7,7 +7,7 @@ return{
 
   bold_brightens_ansi_colors = true,
 
-  default_cursor_style = "BlinkingBlock",
+  default_cursor_style = "SteadyBlock",
   cursor_blink_rate = 750,
   cursor_blink_ease_in = "Constant",
   cursor_blink_ease_out = "Constant",
@@ -20,7 +20,7 @@ return{
     bottom = 10,
   },
 
-  color_scheme = "tokyonight_night",
+  color_scheme = "Tokyo Night Moon",
 
   audible_bell = "Disabled",
 }

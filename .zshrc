@@ -144,6 +144,7 @@ export PATH="/Applications/Sublime Text.app/Contents/SharedSupport/bin:$PATH"
 export PATH="$PATH:/Library/TeX/texbin"
 export PATH="$PATH:/usr/local/bin:"
 export PATH="$PATH:/Users/iason/bin"
+export PATH="$PATH:/opt/local/bin"
 
 export GOPATH=$HOME/.go
 export GOROOT="$(brew --prefix golang)/libexec"
@@ -152,12 +153,6 @@ export PATH="$PATH:${GOPATH}/bin:${GOROOT}/bin"
 export X509_VOMS_DIR=~/.grid-security/vomsdir
 alias proxy="voms-proxy-init --voms cms --valid 168:00  --vomses ~/.grid-security/vomses/"
 
-
-[ -f /opt/homebrew/etc/profile.d/autojump.sh ] && . /opt/homebrew/etc/profile.d/autojump.sh
-
-
-export MODULAR_HOME="/Users/iason/.modular"
-export PATH="/Users/iason/.modular/pkg/packages.modular.com_mojo/bin:$PATH"
 
 # c.f.Richard McElreath's 2024-01-26 tweet
 # https://twitter.com/rlmcelreath/status/1750807826883027304/
@@ -195,80 +190,90 @@ fcd() {
 }
 
 export GPG_TTY=$(tty)
-export PYENV_ROOT="$HOME/.pyenv"
-[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
 
 eval $(thefuck --alias)
 
-alias thisroot="source ~/software/root/root_install/bin/thisroot.sh"
+alias localroot="source ~/software/root/root_install/bin/thisroot.sh"
+alias brewroot="source /opt/homebrew/opt/root/bin/thisroot.sh"
 alias source-util-linux='export PATH="/opt/homebrew/opt/util-linux/bin:$PATH"; export PATH="/opt/homebrew/opt/util-linux/sbin:$PATH"'
 
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/Users/iason/miniforge3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/Users/iason/miniforge3/etc/profile.d/conda.sh" ]; then
-        . "/Users/iason/miniforge3/etc/profile.d/conda.sh"
-    else
-        export PATH="/Users/iason/miniforge3/bin:$PATH"
-    fi
-fi
-unset __conda_setup
-# <<< conda initialize <<<
-
-
-# >>> mamba initialize >>>
-# !! Contents within this block are managed by 'mamba shell init' !!
-export MAMBA_EXE='/Users/iason/miniforge3/condabin/mamba';
-export MAMBA_ROOT_PREFIX='/Users/iason/miniforge3';
-__mamba_setup="$("$MAMBA_EXE" shell hook --shell zsh --root-prefix "$MAMBA_ROOT_PREFIX" 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__mamba_setup"
-else
-    alias mamba="$MAMBA_EXE"  # Fallback on help from mamba activate
-fi
-unset __mamba_setup
-# <<< mamba initialize <<<
 export PATH="/Users/iason/.pixi/bin:$PATH"
+autoload -Uz compinit && compinit  # redundant with Oh My Zsh
+eval "$(pixi completion --shell zsh)"
 
-export PATH="$PATH:/Users/iason/.modular/bin"
-eval "$(magic completion --shell zsh)"
 # The following lines have been added by Docker Desktop to enable Docker CLI completions.
 fpath=(/Users/iason/.docker/completions $fpath)
 autoload -Uz compinit
 compinit
 # End of Docker CLI completions
 
-export PATH="$PATH:/opt/nvim-macos-arm64/bin"
-
-nvim-scylet() {
-  env NVIM_APPNAME=nvim-scylet /opt/nvim-macos-arm64/bin/nvim "$@"
-}
-nvim-lazy() {
-  env NVIM_APPNAME=nvim-lazy /opt/nvim-macos-arm64/bin/nvim "$@"
-}
-
 export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS \
   --highlight-line \
   --info=inline-right \
   --ansi \
   --border=none \
-  --color=bg+:#283457 \
-  --color=bg:#16161e \
-  --color=border:#27a1b9 \
-  --color=fg:#c0caf5 \
-  --color=gutter:#16161e \
-  --color=header:#ff9e64 \
-  --color=hl+:#2ac3de \
-  --color=hl:#2ac3de \
+  --color=bg+:#2d3f76 \
+  --color=bg:#1e2030 \
+  --color=border:#589ed7 \
+  --color=fg:#c8d3f5 \
+  --color=gutter:#1e2030 \
+  --color=header:#ff966c \
+  --color=hl+:#65bcff \
+  --color=hl:#65bcff \
   --color=info:#545c7e \
   --color=marker:#ff007c \
   --color=pointer:#ff007c \
-  --color=prompt:#2ac3de \
-  --color=query:#c0caf5:regular \
-  --color=scrollbar:#27a1b9 \
-  --color=separator:#ff9e64 \
+  --color=prompt:#65bcff \
+  --color=query:#c8d3f5:regular \
+  --color=scrollbar:#589ed7 \
+  --color=separator:#ff966c \
   --color=spinner:#ff007c \
 "
+
+# >>> mamba initialize >>>
+# !! Contents within this block are managed by 'micromamba shell init' !!
+export MAMBA_EXE='/Users/iason/.local/bin/micromamba';
+export MAMBA_ROOT_PREFIX='/Users/iason/micromamba';
+__mamba_setup="$("$MAMBA_EXE" shell hook --shell zsh --root-prefix "$MAMBA_ROOT_PREFIX" 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__mamba_setup"
+else
+    alias micromamba="$MAMBA_EXE"  # Fallback on help from micromamba activate
+fi
+unset __mamba_setup
+# <<< mamba initialize <<<
+alias conda='micromamba'
+alias mamba='micromamba'
+
+eval "$(uv generate-shell-completion zsh)"
+eval "$(uvx --generate-shell-completion zsh)"
+
+# >>> juliaup initialize >>>
+
+# !! Contents within this block are managed by juliaup !!
+
+path=('/Users/iason/.juliaup/bin' $path)
+export PATH
+
+# <<< juliaup initialize <<<
+#
+eval "$(zoxide init zsh)"
+
+alias ls='eza --group-directories-first --icons=auto'
+alias lsa='ls -a'
+alias lt='eza --tree --level=2 --long --icons --git'
+alias lta='lt -a'
+alias ff="fzf --preview 'bat --style=numbers --color=always {}'"
+alias cd="zd"
+zd() {
+  if [ $# -eq 0 ]; then
+    builtin cd ~ && return
+  elif [ -d "$1" ]; then
+    builtin cd "$1"
+  else
+    z "$@" && printf "\U000F17A9 " && pwd || echo "Error: Directory not found"
+  fi
+}
+
+
+ eval "$(starship init zsh)"
