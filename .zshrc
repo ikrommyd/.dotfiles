@@ -178,7 +178,6 @@ function bibtex-from-doi () {
 bindkey "${key[Up]}" fzf-history-widget
 
 bindkey -s ^f "tmux-sessionizer\n"
-bindkey -s ^b "tmux-windowizer\n"
 alias ta="tmux a -t"
 
 fcd() {
