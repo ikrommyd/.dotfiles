@@ -1,0 +1,40 @@
+[user]
+	name = Iason Krommydas
+	email = iason.krom@gmail.com
+	github = ikrommyd
+	signingkey = 075A7C6D3F889DEA
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+[commit]
+	gpgsign = true
+[push]
+	autoSetupRemote = true
+[core]
+	pager = delta -n
+[interactive]
+	diffFilter = delta --color-only
+[delta]
+    navigate = true
+    side-by-side = false
+[merge]
+	conflictStyle = zdiff3
+[color]
+	ui = true
+[color "diff-highlight"]
+	oldNormal = red bold
+	oldHighlight = red bold 52
+	newNormal = green bold
+	newHighlight = green bold 22
+[color "diff"]
+	meta = 11
+	frag = magenta bold
+	func = 146 bold
+	commit = yellow bold
+	old = red bold
+	new = green bold
+	whitespace = red reverse
+[format]
+	signoff = true
