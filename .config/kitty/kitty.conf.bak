@@ -830,7 +830,7 @@ window_padding_width 10
 #: Fade the text in inactive windows by the specified amount (a number
 #: between zero and one, with zero being fully faded).
 
-hide_window_decorations yes
+hide_window_decorations no
 
 #: Hide the window decorations (title-bar and window borders) with
 #: yes. On macOS, titlebar-only and titlebar-and-corners can be used
@@ -1595,7 +1595,7 @@ clipboard_control write-clipboard write-primary read-clipboard-ask read-primary-
 #: Use the macOS traditional full-screen transition, that is faster,
 #: but less pretty.
 
-# macos_show_window_title_in all
+macos_show_window_title_in none
 
 #: Control where the window title is displayed on macOS. A value of
 #: window will show the title of the currently active window at the
@@ -2414,6 +2414,6 @@ map cmd+9 goto_tab 9
 map cmd+f launch --type=overlay --stdin-source=@screen_scrollback /bin/sh -c "/opt/homebrew/bin/fzf --no-sort --no-mouse --exact -i --tac | kitty +kitten clipboard"
 
 # BEGIN_KITTY_THEME
-# One Dark
+# One Dark Warmer
 include current-theme.conf
 # END_KITTY_THEME

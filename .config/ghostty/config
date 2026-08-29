@@ -48,12 +48,15 @@
 # # Just for example:
 # resize-overlay-duration = 4s 200ms
 #
-theme = TokyoNight Moon
-window-decoration = none
-font-size = 10
+theme = dark:TokyoNight Moon,light:TokyoNight Day
+window-decoration = auto
+font-size = 14
+font-feature = -calt
 window-padding-x = 10
 window-padding-y = 10
 cursor-style = block
 cursor-style-blink = false
-shell-integration-features = no-cursor
+shell-integration-features = ssh-env, no-cursor
 bold-is-bright = true
+bell-features = no-title
+keybind = shift+enter=text:\x1b\r

@@ -31,5 +31,12 @@ case ":$PATH:" in
         export PATH=/Users/iason/.juliaup/bin${PATH:+:${PATH}}
         ;;
 esac
+# Tab completion for juliaup and julia channel selection
+[ -f "/Users/iason/.julia/juliaup/completions/bash.sh" ] && source "/Users/iason/.julia/juliaup/completions/bash.sh"
 
 # <<< juliaup initialize <<<
+
+# Added by LM Studio CLI (lms)
+export PATH="$PATH:/Users/iason/.lmstudio/bin"
+# End of LM Studio CLI section
+

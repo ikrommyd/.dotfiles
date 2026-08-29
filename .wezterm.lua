@@ -23,5 +23,8 @@ return{
   color_scheme = "Tokyo Night Moon",
 
   audible_bell = "Disabled",
-}
 
+  keys = {
+    {key="Enter", mods="SHIFT", action=wezterm.action{SendString="\x1b\r"}},
+  },
+}

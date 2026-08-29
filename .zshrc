@@ -128,12 +128,13 @@ alias cmslpcel9="ssh -Y ikrommyd@cmslpc-el9.fnal.gov"
 alias cmslpcgpu1="ssh -Y ikrommyd@cmslpcgpu1.fnal.gov"
 alias cmslpcgpu2="ssh -Y ikrommyd@cmslpcgpu2.fnal.gov"
 alias cmslpcgpu3="ssh -Y ikrommyd@cmslpcgpu3.fnal.gov"
+alias purdue-af="sshpass -p 9a7110ef5c8d4d29aa7e4c29f0ceeabf ssh ikrommyd-cern@jupyterhub-ssh.cms.geddes.rcac.purdue.edu"
 
 alias ma="mamba activate"
 alias deac="mamba deactivate"
 
-alias sleepoff="python ~/disablesleep.py on"
-alias sleepon="python ~/disablesleep.py off"
+alias sleepoff="python3 ~/disablesleep.py on"
+alias sleepon="python3 ~/disablesleep.py off"
 
 # Set PATH, MANPATH, etc., for Homebrew.
 eval "$(/opt/homebrew/bin/brew shellenv)"
@@ -190,11 +191,19 @@ fcd() {
 
 export GPG_TTY=$(tty)
 
-eval $(thefuck --alias)
+alias thislocalroot="source ~/software/root/root_install/bin/thisroot.sh"
+alias thisbrewroot="source /opt/homebrew/opt/root/bin/thisroot.sh"
+alias thisutillinux='export PATH="/opt/homebrew/opt/util-linux/bin:$PATH"; export PATH="/opt/homebrew/opt/util-linux/sbin:$PATH"'
 
-alias localroot="source ~/software/root/root_install/bin/thisroot.sh"
-alias brewroot="source /opt/homebrew/opt/root/bin/thisroot.sh"
-alias source-util-linux='export PATH="/opt/homebrew/opt/util-linux/bin:$PATH"; export PATH="/opt/homebrew/opt/util-linux/sbin:$PATH"'
+thisllvm() {
+    export PATH="/opt/homebrew/opt/llvm/bin:$PATH"
+    export LDFLAGS="-L/opt/homebrew/opt/llvm/lib"
+    export CPPFLAGS="-I/opt/homebrew/opt/llvm/include"
+    export CMAKE_PREFIX_PATH="/opt/homebrew/opt/llvm"
+    echo "LLVM environment configured:"
+    echo "  PATH updated with /opt/homebrew/opt/llvm/bin"
+    echo "  LDFLAGS, CPPFLAGS, and CMAKE_PREFIX_PATH set"
+}
 
 export PATH="/Users/iason/.pixi/bin:$PATH"
 autoload -Uz compinit && compinit  # redundant with Oh My Zsh
@@ -253,6 +262,8 @@ eval "$(uvx --generate-shell-completion zsh)"
 
 path=('/Users/iason/.juliaup/bin' $path)
 export PATH
+# Tab completion for juliaup and julia channel selection
+[ -f "/Users/iason/.julia/juliaup/completions/zsh.zsh" ] && source "/Users/iason/.julia/juliaup/completions/zsh.zsh"
 
 # <<< juliaup initialize <<<
 #
@@ -274,5 +285,46 @@ zd() {
   fi
 }
 
+export EZA_CONFIG_DIR="$HOME/.config/eza"
 
- eval "$(starship init zsh)"
+export PYENV_ROOT="$HOME/.pyenv"
+[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init - zsh)"
+
+# export DYLD_INSERT_LIBRARIES="/opt/homebrew/lib/libmimalloc.dylib"
+
+# opencode
+export PATH=/Users/iason/.opencode/bin:$PATH
+#compdef opencode
+###-begin-opencode-completions-###
+#
+# yargs command completion script
+#
+# Installation: opencode completion >> ~/.zshrc
+#    or opencode completion >> ~/.zprofile on OSX.
+#
+_opencode_yargs_completions()
+{
+  local reply
+  local si=$IFS
+  IFS=$'
+' reply=($(COMP_CWORD="$((CURRENT-1))" COMP_LINE="$BUFFER" COMP_POINT="$CURSOR" opencode --get-yargs-completions "${words[@]}"))
+  IFS=$si
+  if [[ ${#reply} -gt 0 ]]; then
+    _describe 'values' reply
+  else
+    _default
+  fi
+}
+if [[ "'${zsh_eval_context[-1]}" == "loadautofunc" ]]; then
+  _opencode_yargs_completions "$@"
+else
+  compdef _opencode_yargs_completions opencode
+fi
+###-end-opencode-completions-###
+
+# Added by LM Studio CLI (lms)
+export PATH="$PATH:/Users/iason/.lmstudio/bin"
+# End of LM Studio CLI section
+
+eval "$(starship init zsh)"
